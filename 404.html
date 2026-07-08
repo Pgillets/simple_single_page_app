@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Página não encontrada · Stack Simples</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f7fb">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0e1118">
+  <!--
+    Este arquivo só existe para caminhos que o GitHub Pages não conhece
+    (ex.: alguém digitou /simple_single_page_app/pagina-que-nao-existe).
+    A aplicação usa roteamento por HASH (#/rota), que nunca chega ao
+    servidor — então, na prática, quem navega pelo site nunca vê esta
+    página. Ela é cosmética, não um mecanismo de roteamento.
+  -->
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: #f6f7fb;
+      color: #171923;
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    @media (prefers-color-scheme: dark) {
+      body { background: #0e1118; color: #e8eaf2; }
+      a { color: #a5b4fc; }
+    }
+    a { color: #4338ca; }
+    .caixa { max-width: 30rem; }
+    h1 { font-size: 1.6rem; margin: 0 0 0.6rem; }
+  </style>
+</head>
+<body>
+  <div class="caixa">
+    <h1>Página não encontrada</h1>
+    <p>O caminho <code id="caminho"></code> não existe neste site.</p>
+    <p><a id="link-inicio" href="./">Voltar ao início</a> (redirecionando automaticamente…)</p>
+  </div>
+  <script>
+    // Caminhos internos da aplicação começam com o fragmento "#" e nunca
+    // chegam até aqui — este script só trata caminhos realmente inexistentes.
+    // Detecção pelo CAMINHO (não pelo hostname): funciona igual em
+    // localhost, no project page e no domínio próprio, sem edição.
+    (function () {
+      var repositorio = "simple_single_page_app";
+      var segmentos = location.pathname.split("/").filter(Boolean);
+      var naRaizDoProjeto = segmentos[0] === repositorio;
+      var destino = naRaizDoProjeto ? "/" + repositorio + "/" : "/";
+      document.getElementById("caminho").textContent = location.pathname;
+      document.getElementById("link-inicio").setAttribute("href", destino);
+      setTimeout(function () {
+        location.replace(destino);
+      }, 1200);
+    })();
+  </script>
+</body>
+</html>

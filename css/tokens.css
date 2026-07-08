@@ -1,0 +1,88 @@
+/*
+ * tokens.css — só design tokens (CSS custom properties).
+ *
+ * O tema inteiro do site é definido aqui. O bloco escuro aparece duas vezes
+ * de propósito (é o preço honesto do zero-build, sem pré-processador):
+ *   1. dentro de @media (prefers-color-scheme: dark), quando o visitante segue
+ *      o sistema e NÃO forçou o tema claro;
+ *   2. em :root[data-tema="escuro"], quando o visitante escolheu o escuro
+ *      explicitamente (js/tema.js grava a escolha em localStorage).
+ */
+
+:root {
+  color-scheme: light;
+
+  /* Cores */
+  --cor-fundo: #f6f7fb;
+  --cor-superficie: #ffffff;
+  --cor-superficie-2: #eceef6;
+  --cor-texto: #171923;
+  --cor-texto-suave: #545b6b;
+  --cor-borda: #dfe3ee;
+  --cor-destaque: #4f46e5;
+  --cor-destaque-forte: #4338ca;
+  --cor-sobre-destaque: #ffffff;
+  --cor-ok: #15803d;
+  --cor-aviso: #92400e;
+  --cor-erro: #b91c1c;
+  --cor-codigo-fundo: #14161f;
+  --cor-codigo-texto: #dfe3ee;
+  --gradiente: linear-gradient(120deg, #4f46e5, #0891b2);
+
+  /* Tipografia */
+  --fonte: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --fonte-mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, Consolas, monospace;
+
+  /* Forma e ritmo */
+  --raio: 14px;
+  --raio-s: 8px;
+  --sombra: 0 1px 2px rgb(23 25 35 / 0.05), 0 10px 28px -14px rgb(23 25 35 / 0.14);
+  --duracao: 180ms;
+  --largura-conteudo: 68rem;
+}
+
+/* Tema escuro seguindo o sistema (sem escolha explícita do visitante). */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema="claro"]) {
+    color-scheme: dark;
+
+    --cor-fundo: #0e1118;
+    --cor-superficie: #171b26;
+    --cor-superficie-2: #1f2432;
+    --cor-texto: #e8eaf2;
+    --cor-texto-suave: #9aa3b5;
+    --cor-borda: #2a3040;
+    --cor-destaque: #6d75f2;
+    --cor-destaque-forte: #a5b4fc;
+    --cor-sobre-destaque: #ffffff;
+    --cor-ok: #4ade80;
+    --cor-aviso: #fbbf24;
+    --cor-erro: #f87171;
+    --cor-codigo-fundo: #0b0d13;
+    --cor-codigo-texto: #dfe3ee;
+    --gradiente: linear-gradient(120deg, #818cf8, #22d3ee);
+    --sombra: 0 1px 2px rgb(0 0 0 / 0.4), 0 10px 28px -14px rgb(0 0 0 / 0.55);
+  }
+}
+
+/* Tema escuro escolhido explicitamente (data-tema vem de js/tema-boot.js). */
+:root[data-tema="escuro"] {
+  color-scheme: dark;
+
+  --cor-fundo: #0e1118;
+  --cor-superficie: #171b26;
+  --cor-superficie-2: #1f2432;
+  --cor-texto: #e8eaf2;
+  --cor-texto-suave: #9aa3b5;
+  --cor-borda: #2a3040;
+  --cor-destaque: #6d75f2;
+  --cor-destaque-forte: #a5b4fc;
+  --cor-sobre-destaque: #ffffff;
+  --cor-ok: #4ade80;
+  --cor-aviso: #fbbf24;
+  --cor-erro: #f87171;
+  --cor-codigo-fundo: #0b0d13;
+  --cor-codigo-texto: #dfe3ee;
+  --gradiente: linear-gradient(120deg, #818cf8, #22d3ee);
+  --sombra: 0 1px 2px rgb(0 0 0 / 0.4), 0 10px 28px -14px rgb(0 0 0 / 0.55);
+}
