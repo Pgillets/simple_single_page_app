@@ -14,7 +14,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
-      - run: npx --yes html-validate "**/*.html" --ignore "node_modules"
+      - run: npx --yes html-validate "**/*.html"
 
   check-links:
     name: Verificar links
@@ -23,9 +23,15 @@ jobs:
       - uses: actions/checkout@v4
       - uses: lycheeverse/lychee-action@v2
         with:
+          # api.github.com: evita gastar o rate limit anônimo em toda checagem de CI.
+          # pgillets.github.io: é a própria URL de produção deste site — checar aqui
+          # criaria uma dependência circular (o CI de um push/PR passaria a depender
+          # do Pages já estar publicado e propagado, o que é instável e nem sempre
+          # verdadeiro, sobretudo antes do primeiro deploy ou em forks).
           args: >-
             --no-progress
             --accept 200..=204,429
             --exclude "https://api\.github\.com.*"
+            --exclude "https://pgillets\.github\.io.*"
             "**/*.html" "**/*.md"
           fail: true
