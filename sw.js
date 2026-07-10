@@ -16,19 +16,22 @@
  * é o gatilho que faz o activate() descartar o cache antigo.
  */
 
-const VERSAO = "v2";
+const VERSAO = "v3";
 const CACHE = `shell-${VERSAO}`;
 
 const PRECACHE = [
   "./",
   "./index.html",
+  "./tecnologia.html",
   "./404.html",
   "./manifest.webmanifest",
   "./css/tokens.css",
   "./css/base.css",
   "./css/componentes.css",
+  "./css/negocio.css",
   "./js/tema-boot.js",
   "./js/app.js",
+  "./js/app-site.js",
   "./js/roteador.js",
   "./js/tema.js",
   "./js/github-api.js",
@@ -50,6 +53,7 @@ const PRECACHE = [
   "./assets/favicon.svg",
   "./assets/icones/icone-192.png",
   "./assets/icones/icone-512.png",
+  "./assets/og-capa-negocio.png",
 ];
 
 self.addEventListener("install", (evento) => {
@@ -107,7 +111,11 @@ async function networkFirst(requisicao) {
     const emCache = await cache.match(requisicao, { ignoreSearch: true });
     if (emCache) return emCache;
     if (requisicao.mode === "navigate") {
-      const casca = await cache.match("./index.html");
+      // Duas cascas possíveis: tecnologia.html tem sua própria SPA por
+      // dentro (roteador com várias rotas); qualquer outro caminho é o
+      // site institucional (index.html), incluindo "/" e "/index.html".
+      const paginaTecnica = new URL(requisicao.url).pathname.endsWith("tecnologia.html");
+      const casca = await cache.match(paginaTecnica ? "./tecnologia.html" : "./index.html");
       if (casca) return casca;
     }
     throw erro;

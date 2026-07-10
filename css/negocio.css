@@ -1,0 +1,128 @@
+/*
+ * negocio.css — estilos exclusivos do site institucional (index.html).
+ * Carregado só aqui; tecnologia.html nem referencia este arquivo.
+ */
+
+main > section {
+  margin-block: 3rem;
+  scroll-margin-top: 4.5rem; /* header sticky não cobre o topo da seção ao rolar até a âncora */
+}
+
+main > section h2 {
+  margin-bottom: 0.4rem;
+}
+
+main > section > .lide {
+  margin-bottom: 1.5rem;
+}
+
+/* ===== Serviços ===== */
+
+.grade-servicos {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  margin-top: 1.5rem;
+}
+
+.card-servico {
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  padding: 1.25rem;
+  box-shadow: var(--sombra);
+}
+
+.card-servico-icone {
+  font-size: 1.8rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.card-servico h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.35rem;
+}
+
+.card-servico p {
+  color: var(--cor-texto-suave);
+  font-size: 0.94rem;
+}
+
+/* ===== Sobre ===== */
+
+.sobre-negocio {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: minmax(0, 1.4fr) minmax(14rem, 1fr);
+  align-items: start;
+  margin-top: 1.25rem;
+}
+
+.sobre-negocio-texto p + p {
+  margin-top: 0.75rem;
+}
+
+@media (max-width: 46rem) {
+  .sobre-negocio {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== Depoimentos ===== */
+
+.grade-depoimentos {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  margin-top: 1.5rem;
+}
+
+.depoimento {
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-left: 3px solid var(--cor-destaque);
+  border-radius: var(--raio-s);
+  padding: 1.1rem 1.3rem;
+  margin: 0;
+}
+
+.depoimento p {
+  font-style: italic;
+  color: var(--cor-texto);
+}
+
+.depoimento footer {
+  margin-top: 0.6rem;
+  font-size: 0.88rem;
+  color: var(--cor-texto-suave);
+  font-style: normal;
+}
+
+/* ===== Contato ===== */
+
+.contato-grade {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 2.5rem;
+  align-items: flex-start;
+  margin-top: 1.25rem;
+}
+
+.contato-info p {
+  margin-bottom: 0.5rem;
+}
+
+.contato-info a {
+  margin-left: 0.4ch;
+}
+
+/* ===== Rodapé institucional ===== */
+
+.rodape-negocio .rodape-conteudo {
+  align-items: flex-start;
+}
+
+.rodape-negocio p {
+  margin: 0;
+}

@@ -91,10 +91,12 @@ O código da aplicação não precisa de nenhuma mudança — roteamento por has
 relativos já funcionam em qualquer base. O que **vale a pena** atualizar, por serem as
 únicas URLs absolutas do projeto:
 
-- [ ] `index.html`: `<link rel="canonical">`, `og:url`, `og:image` → nova URL.
-- [ ] Adicionar `robots.txt` (`Allow: /` + linha `Sitemap:`) e `sitemap.xml` com URLs
-      absolutas do novo domínio — antes da migração isso não fazia sentido, porque a
-      raiz de `pgillets.github.io` não pertence a este repositório.
+- [ ] `index.html`: `<link rel="canonical">`, `og:url`, `og:image` e as URLs dentro do
+      bloco `<script type="application/ld+json">` → novo domínio.
+- [ ] `tecnologia.html`: `<link rel="canonical">`, `og:url`, `og:image` → novo domínio.
+- [ ] `robots.txt`: a linha `Sitemap:` → novo domínio.
+- [ ] `sitemap.xml`: a(s) `<loc>` → novo domínio (já existem desde o início — só
+      trocar a URL, não recriar).
 - [ ] Atualizar as URLs mencionadas no `README.md`.
 - [ ] Nada a fazer com a URL antiga: `pgillets.github.io/simple_single_page_app/`
       passa a redirecionar (301) para o domínio novo automaticamente.
