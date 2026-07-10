@@ -186,6 +186,10 @@
   margin-block: 2rem;
 }
 
+.grade-cards--estreita {
+  max-width: 22rem;
+}
+
 .grade-stats {
   display: grid;
   gap: 0.75rem;
@@ -495,11 +499,61 @@ li.feita .texto-nota {
   border-bottom: 1px solid var(--cor-borda);
 }
 
+/* Uma classe por token de cor (ver js/paginas/tema.js) — a cor vem só daqui,
+   nunca de JS setando "style" no elemento (a CSP do site não permite). */
+.amostra-cor.fundo { background: var(--cor-fundo); }
+.amostra-cor.superficie { background: var(--cor-superficie); }
+.amostra-cor.texto { background: var(--cor-texto); }
+.amostra-cor.texto-suave { background: var(--cor-texto-suave); }
+.amostra-cor.destaque { background: var(--cor-destaque); }
+.amostra-cor.borda { background: var(--cor-borda); }
+.amostra-cor.ok { background: var(--cor-ok); }
+.amostra-cor.erro { background: var(--cor-erro); }
+
 .amostra figcaption {
   padding: 0.45rem 0.7rem;
   font-family: var(--fonte-mono);
   font-size: 0.75rem;
   color: var(--cor-texto-suave);
+}
+
+/* ===== Demos de componentes (página Componentes) ===== */
+
+.linha-selos-demo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: center;
+  margin-block: 1rem;
+}
+
+.demo-avaliacao {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-block: 1rem;
+}
+
+.demo-avaliacao p {
+  color: var(--cor-texto-suave);
+  font-size: 0.92rem;
+}
+
+/* ::part() em ação: só os nomes de parte expostos pelo componente
+   (selo, ponto, rotulo) são alcançáveis daqui — o resto do shadow DOM
+   continua isolado. */
+.demo-selo-customizado::part(selo) {
+  border-style: dashed;
+  border-width: 2px;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+}
+
+.demo-selo-customizado::part(ponto) {
+  width: 0.7em;
+  height: 0.7em;
 }
 
 /* ===== Bloco do canvas ===== */

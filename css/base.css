@@ -129,6 +129,12 @@ main:focus {
   margin-bottom: 0.6rem;
 }
 
+.pagina section h3 {
+  font-size: 1.05rem;
+  margin-top: 1.6rem;
+  margin-bottom: 0.5rem;
+}
+
 .pagina section p,
 .pagina section li {
   max-width: 72ch;
