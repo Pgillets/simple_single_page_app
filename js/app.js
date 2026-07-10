@@ -12,6 +12,8 @@ import { registrarServiceWorker } from "./sw-registro.js";
 // Web Components: importar já registra os elementos customizados.
 import "./componentes/demo-card.js";
 import "./componentes/trecho-codigo.js";
+import "./componentes/selo-status.js";
+import "./componentes/estrela-avaliacao.js";
 
 // Vistas — uma por rota.
 import * as inicio from "./paginas/inicio.js";

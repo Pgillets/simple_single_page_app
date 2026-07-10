@@ -16,7 +16,7 @@
  * é o gatilho que faz o activate() descartar o cache antigo.
  */
 
-const VERSAO = "v1";
+const VERSAO = "v2";
 const CACHE = `shell-${VERSAO}`;
 
 const PRECACHE = [
@@ -35,6 +35,8 @@ const PRECACHE = [
   "./js/sw-registro.js",
   "./js/componentes/demo-card.js",
   "./js/componentes/trecho-codigo.js",
+  "./js/componentes/selo-status.js",
+  "./js/componentes/estrela-avaliacao.js",
   "./js/paginas/inicio.js",
   "./js/paginas/roteamento.js",
   "./js/paginas/tema.js",

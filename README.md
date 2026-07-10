@@ -18,12 +18,12 @@ web moderna.
 | `#/` | Visão geral e responsividade sem CSS framework |
 | `#/roteamento` | Roteamento SPA por hash + View Transitions API |
 | `#/tema` | Tema claro/escuro com CSS custom properties + `prefers-color-scheme` + `localStorage` |
-| `#/componentes` | Web Components: shadow DOM vs. light DOM |
+| `#/componentes` | Web Components: shadow DOM vs. light DOM, atributos reativos, `::part()`, eventos customizados |
 | `#/canvas` | Animação de partículas com Canvas 2D + `requestAnimationFrame` |
 | `#/api` | Dados ao vivo do próprio repositório via API do GitHub, sem backend |
 | `#/notas` | Persistência local (`localStorage`) com sincronização entre abas |
 | `#/offline` | PWA: manifesto, service worker, instalação e uso offline |
-| `#/sobre` | A filosofia do projeto e como publicar o seu igual |
+| `#/sobre` | A filosofia do projeto, como o código está organizado e como publicar o seu igual |
 
 ## Como funciona
 
@@ -91,7 +91,7 @@ css/            → tokens.css (design tokens), base.css (reset/layout), compone
 js/
   roteador.js, tema.js, tema-boot.js, app.js         → núcleo da SPA
   github-api.js, sw-registro.js                      → integrações
-  componentes/    → Web Components (<demo-card>, <trecho-codigo>)
+  componentes/    → Web Components (<demo-card>, <trecho-codigo>, <selo-status>, <estrela-avaliacao>)
   paginas/        → uma vista por rota
 assets/         → favicon, ícones PWA, imagem de Open Graph
 docs/DOMINIO.md → runbook de domínio personalizado

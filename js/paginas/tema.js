@@ -66,15 +66,18 @@ export function render(outlet) {
     </div>
   `;
 
-  // Amostras: o background referencia var(--token) via CSSOM — quando o tema
-  // muda, o navegador atualiza as cores sozinho.
+  // Amostras: cada cor vem de uma classe (.amostra-cor.fundo, .ok, ...) que
+  // referencia var(--token) no CSS — não de JS setando "style" no elemento.
+  // A CSP deste site (default-src 'self', sem style-src próprio) bloqueia
+  // qualquer estilo inline, incluindo element.style.setProperty() feito por
+  // script; expressar a cor como classe mantém a demonstração 100% CSS (é
+  // por isso que muda sozinha ao trocar de tema, sem nenhum JS envolvido).
   const grade = outlet.querySelector("#amostras");
   for (const token of TOKENS) {
     const figura = document.createElement("figure");
     figura.className = "amostra";
     const cor = document.createElement("div");
-    cor.className = "amostra-cor";
-    cor.style.setProperty("background", `var(${token})`);
+    cor.className = `amostra-cor ${token.replace("--cor-", "")}`;
     const legenda = document.createElement("figcaption");
     legenda.textContent = token;
     figura.append(cor, legenda);

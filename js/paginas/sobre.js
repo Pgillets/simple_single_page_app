@@ -30,6 +30,79 @@ export function render(outlet) {
       </section>
 
       <section>
+        <h2>Como o código está organizado</h2>
+        <p>
+          Duas metades: a <strong>casca</strong> na raiz do repositório
+          (<code>index.html</code>, <code>css/</code>, <code>assets/</code>) e a
+          <strong>aplicação</strong> inteira dentro de <code>js/</code>. O
+          <code>index.html</code> carrega um único módulo — <code>js/app.js</code> —
+          e nunca mais recarrega depois disso; é o roteador quem troca o conteúdo.
+        </p>
+        <pre><code>index.html          A única página HTML real. Depois do 1º carregamento,
+                    nunca recarrega — o roteador troca só o miolo.
+404.html            Só entra em cena se alguém digitar um CAMINHO de servidor
+                    inexistente (diferente de uma rota interna desconhecida,
+                    que é tratada dentro da própria aplicação).
+manifest.webmanifest, sw.js
+                    O que torna o site instalável e funcional offline.
+
+css/
+  tokens.css        Só variáveis: cores, espaçamento, fontes — o "sistema de
+                    design" do site inteiro.
+  base.css          Reset, layout do documento, tipografia, acessibilidade.
+  componentes.css   Estilos reutilizados por várias páginas (nav, cards,
+                    botões, blocos de demonstração...).
+
+js/
+  app.js            O ÚNICO arquivo que o index.html carrega como módulo.
+                    Importa tudo o resto e liga as três peças do núcleo.
+  roteador.js, tema.js, tema-boot.js, sw-registro.js, github-api.js
+                    O "núcleo": comportamento compartilhado por várias páginas.
+  componentes/      Web Components reutilizáveis — tags HTML de verdade,
+                    registradas uma vez quando app.js as importa.
+  paginas/          Uma vista por rota. Todo arquivo aqui segue o mesmo
+                    contrato: exporta titulo e render(outlet).</code></pre>
+
+        <h3>O que acontece quando a página carrega</h3>
+        <ol>
+          <li>O navegador busca <code>index.html</code>. Antes de qualquer CSS ou
+              módulo, o <code>&lt;head&gt;</code> já carrega <code>js/tema-boot.js</code>
+              como script clássico e bloqueante — ele aplica o tema salvo no
+              <code>&lt;html&gt;</code> antes da primeira pintura, evitando o "flash" de
+              tema errado.</li>
+          <li>As três folhas de CSS carregam, nesta ordem:
+              <code>tokens.css</code> → <code>base.css</code> → <code>componentes.css</code>.</li>
+          <li><code>js/app.js</code> roda como módulo (<code>type="module"</code>) e
+              importa tudo o resto: os Web Components (que se auto-registram ao
+              serem importados) e todas as vistas de <code>js/paginas/</code>.</li>
+          <li><code>app.js</code> chama, nesta ordem: <code>definirRotas(...)</code>
+              (um mapa <em>caminho → vista</em>), <code>iniciarTema(...)</code> (liga o
+              botão do cabeçalho), <code>iniciarRoteador(...)</code> (lê
+              <code>location.hash</code> e renderiza a vista certa dentro de
+              <code>&lt;main id="conteudo"&gt;</code>) e <code>registrarServiceWorker()</code>.</li>
+          <li>A cada clique num link <code>#/algo</code>, só o conteúdo de
+              <code>&lt;main&gt;</code> muda: o roteador chama a limpeza da vista
+              anterior (se ela devolveu uma) e depois o <code>render()</code> da nova —
+              veja os detalhes em <a href="#/roteamento">Rotas</a>.</li>
+        </ol>
+
+        <h3>Como adicionar uma página nova</h3>
+        <p>É o mesmo receita que usamos para os exemplos deste site:</p>
+        <ol>
+          <li>Criar <code>js/paginas/minha-pagina.js</code> exportando
+              <code>titulo</code> e <code>render(outlet)</code>.</li>
+          <li>Importar esse módulo em <code>app.js</code> e adicionar uma entrada no
+              mapa passado para <code>definirRotas(...)</code>.</li>
+          <li>Adicionar o link <code>&lt;a href="#/minha-pagina"&gt;</code> na navegação
+              do <code>index.html</code>.</li>
+          <li>Se a página deve funcionar offline desde o primeiro carregamento,
+              adicionar o caminho do novo arquivo à lista <code>PRECACHE</code> do
+              <code>sw.js</code> e subir a constante <code>VERSAO</code> — é o que
+              dispara a substituição do cache antigo (ver <a href="#/offline">Offline</a>).</li>
+        </ol>
+      </section>
+
+      <section>
         <h2>O que ficou de fora — de propósito</h2>
         <p>
           Nada contra frameworks: em apps grandes, com equipes grandes, eles pagam o
