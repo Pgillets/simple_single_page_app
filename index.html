@@ -5,24 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!--
-    CSP em site 100% estático: o GitHub Pages não permite cabeçalhos HTTP
-    customizados, mas uma meta tag cobre quase tudo. Por causa dela, este
-    documento não tem NENHUM script ou estilo inline — tudo vem de arquivos
-    próprios (script-src/style-src herdam de default-src 'self').
+    CONTEÚDO DE EXEMPLO — troque pelo da sua empresa.
+    Esta página simula uma clínica odontológica fictícia ("Clínica Sorriso
+    Pleno") só para deixar concretos: a estrutura de seções, as meta tags de
+    SEO e o JSON-LD abaixo. Nome, textos, endereço, telefone e imagens são
+    todos placeholders — troque tudo antes de publicar.
+
+    Por que este HTML é estático (sem JavaScript renderizando o conteúdo)?
+    Buscadores e redes sociais devem ver o conteúdo real imediatamente, sem
+    precisar executar JS — e o site precisa funcionar mesmo se o JS falhar
+    ou demorar. JS aqui só liga melhorias (tema, navegação realçada,
+    funcionamento offline) — nunca o conteúdo em si. Veja tecnologia.html
+    para a versão SPA deste mesmo template, usada nas páginas de
+    demonstração técnica.
   -->
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://api.github.com; img-src 'self' data:; base-uri 'self'; form-action 'none'; object-src 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; base-uri 'self'; form-action 'none'; object-src 'none'">
   <meta name="referrer" content="strict-origin-when-cross-origin">
 
-  <title>Stack Simples · SPA no GitHub Pages</title>
-  <meta name="description" content="Uma single page application sem build, sem framework e sem dependências, hospedada de graça no GitHub Pages — e a prova de que essa stack simples é poderosa.">
+  <title>Clínica Sorriso Pleno — Odontologia em São Paulo</title>
+  <meta name="description" content="Clínica odontológica completa em São Paulo: limpeza, clareamento, ortodontia e implantes, com atendimento humanizado. Agende sua consulta pelo WhatsApp.">
 
-  <!-- Únicas URLs absolutas do projeto: atualizadas no checklist de docs/DOMINIO.md quando o domínio próprio entrar. -->
+  <!-- Únicas URLs absolutas do projeto: atualize para o seu domínio ao publicar (ver docs/DOMINIO.md). -->
   <link rel="canonical" href="https://pgillets.github.io/simple_single_page_app/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Stack Simples — SPA no GitHub Pages">
-  <meta property="og:description" content="SPA sem build, sem framework e sem dependências, hospedada de graça no GitHub Pages.">
+  <meta property="og:title" content="Clínica Sorriso Pleno — Odontologia em São Paulo">
+  <meta property="og:description" content="Odontologia completa para toda a família, com atendimento humanizado e tecnologia de ponta.">
   <meta property="og:url" content="https://pgillets.github.io/simple_single_page_app/">
-  <meta property="og:image" content="https://pgillets.github.io/simple_single_page_app/assets/og-capa.png">
+  <meta property="og:image" content="https://pgillets.github.io/simple_single_page_app/assets/og-capa-negocio.png">
   <meta property="og:locale" content="pt_BR">
   <meta name="twitter:card" content="summary_large_image">
 
@@ -36,49 +45,191 @@
   <link rel="stylesheet" href="./css/tokens.css">
   <link rel="stylesheet" href="./css/base.css">
   <link rel="stylesheet" href="./css/componentes.css">
+  <link rel="stylesheet" href="./css/negocio.css">
 
   <!-- Anti-FOUC: aplica o tema salvo ANTES do primeiro paint. Script clássico e bloqueante de propósito. -->
   <script src="./js/tema-boot.js"></script>
-  <script type="module" src="./js/app.js"></script>
+  <script type="module" src="./js/app-site.js"></script>
+
+  <!--
+    Dados estruturados (schema.org/Dentist, um subtipo de LocalBusiness).
+    Ajudam buscadores a mostrar nome, endereço, telefone e horário direto
+    no resultado de busca. Troque cada campo pelo dado real do negócio.
+    Um <script type="application/ld+json"> é dado inerte, não código — a
+    CSP acima não precisa (nem deve) abrir exceção para ele.
+  -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Dentist",
+    "name": "Clínica Sorriso Pleno",
+    "image": "https://pgillets.github.io/simple_single_page_app/assets/og-capa-negocio.png",
+    "url": "https://pgillets.github.io/simple_single_page_app/",
+    "telephone": "+55-11-4000-0000",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Rua Exemplo, 123",
+      "addressLocality": "São Paulo",
+      "addressRegion": "SP",
+      "postalCode": "01000-000",
+      "addressCountry": "BR"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -23.5505,
+      "longitude": -46.6333
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "18:00"
+      }
+    ],
+    "sameAs": [
+      "https://www.instagram.com/",
+      "https://www.facebook.com/"
+    ]
+  }
+  </script>
 </head>
 <body>
-  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+  <a class="pular" href="#inicio">Pular para o conteúdo</a>
 
   <header class="topo">
     <div class="topo-conteudo">
-      <a class="marca" href="#/">
+      <a class="marca" href="#inicio">
         <img src="./assets/favicon.svg" alt="" width="22" height="22">
-        <span>Stack Simples</span>
+        <span>Clínica Sorriso Pleno</span>
       </a>
       <nav aria-label="Navegação principal">
-        <a href="#/">Início</a>
-        <a href="#/roteamento">Rotas</a>
-        <a href="#/tema">Tema</a>
-        <a href="#/componentes">Componentes</a>
-        <a href="#/canvas">Canvas</a>
-        <a href="#/api">API</a>
-        <a href="#/notas">Notas</a>
-        <a href="#/offline">Offline</a>
+        <a href="#inicio">Início</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#depoimentos">Depoimentos</a>
+        <a href="#contato">Contato</a>
       </nav>
       <button id="alternar-tema" type="button" aria-label="Alternar tema"></button>
     </div>
   </header>
 
-  <main id="conteudo" tabindex="-1">
-    <noscript>
-      <h1>Stack Simples</h1>
-      <p>Este site é uma <em>single page application</em> escrita em JavaScript puro — sem build e sem
-        dependências — e precisa de JavaScript habilitado para funcionar.</p>
-      <p>O código-fonte completo está em
-        <a href="https://github.com/pgillets/simple_single_page_app">github.com/pgillets/simple_single_page_app</a>.</p>
-    </noscript>
+  <main id="inicio">
+    <section class="heroi">
+      <h1>Seu sorriso merece o melhor cuidado</h1>
+      <p class="lide">
+        Odontologia completa para toda a família, com atendimento humanizado e
+        tecnologia de ponta, no coração de São Paulo.
+      </p>
+      <div class="grupo-botoes">
+        <a class="botao botao-primario" href="https://wa.me/5511999999999" target="_blank" rel="noopener">
+          Agendar pelo WhatsApp
+        </a>
+        <a class="botao" href="#servicos">Ver serviços</a>
+      </div>
+    </section>
+
+    <section id="servicos">
+      <h2>Nossos serviços</h2>
+      <p class="lide">Cuidado completo para a sua saúde bucal, em cada etapa da vida.</p>
+      <div class="grade-servicos">
+        <article class="card-servico">
+          <span class="card-servico-icone" aria-hidden="true">🦷</span>
+          <h3>Limpeza e prevenção</h3>
+          <p>Profilaxia, remoção de tártaro e orientação para manter o sorriso saudável entre as consultas.</p>
+        </article>
+        <article class="card-servico">
+          <span class="card-servico-icone" aria-hidden="true">✨</span>
+          <h3>Clareamento dental</h3>
+          <p>Técnicas seguras de clareamento, no consultório ou em casa, com acompanhamento profissional.</p>
+        </article>
+        <article class="card-servico">
+          <span class="card-servico-icone" aria-hidden="true">😬</span>
+          <h3>Ortodontia</h3>
+          <p>Aparelhos fixos e alinhadores transparentes para todas as idades, com plano de tratamento personalizado.</p>
+        </article>
+        <article class="card-servico">
+          <span class="card-servico-icone" aria-hidden="true">🦴</span>
+          <h3>Implantes</h3>
+          <p>Reabilitação de dentes ausentes com implantes de alta durabilidade e planejamento digital.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="sobre">
+      <h2>Sobre a clínica</h2>
+      <div class="sobre-negocio">
+        <div class="sobre-negocio-texto">
+          <p>
+            Há mais de 15 anos cuidamos da saúde bucal de famílias inteiras em São
+            Paulo. Nossa equipe combina experiência clínica com equipamentos modernos
+            para oferecer um atendimento cuidadoso, do primeiro contato ao pós-tratamento.
+          </p>
+          <p>
+            Acreditamos que ir ao dentista não precisa ser desconfortável — por isso
+            investimos em um ambiente acolhedor e em explicar cada etapa do tratamento
+            com clareza.
+          </p>
+        </div>
+        <div class="grade-stats">
+          <div class="stat">
+            <span class="stat-valor">15+</span>
+            <span class="stat-rotulo">anos de experiência</span>
+          </div>
+          <div class="stat">
+            <span class="stat-valor">3.000+</span>
+            <span class="stat-rotulo">pacientes atendidos</span>
+          </div>
+          <div class="stat">
+            <span class="stat-valor">4,9</span>
+            <span class="stat-rotulo">avaliação média</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="depoimentos">
+      <h2>O que dizem nossos pacientes</h2>
+      <div class="grade-depoimentos">
+        <blockquote class="depoimento">
+          <p>"Atendimento excelente, super atenciosos e o resultado do meu clareamento ficou incrível. Recomendo de olhos fechados."</p>
+          <footer><span aria-hidden="true">★★★★★</span> Marina C.</footer>
+        </blockquote>
+        <blockquote class="depoimento">
+          <p>"Fiz tratamento ortodôntico com eles e o acompanhamento foi impecável do início ao fim. Equipe muito profissional."</p>
+          <footer><span aria-hidden="true">★★★★★</span> Rafael S.</footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <section id="contato">
+      <h2>Venha nos visitar</h2>
+      <div class="contato-grade">
+        <div class="contato-info">
+          <p>
+            <strong>Endereço:</strong> Rua Exemplo, 123 — São Paulo, SP
+            <a href="https://www.google.com/maps/search/?api=1&query=Rua+Exemplo+123+São+Paulo+SP" target="_blank" rel="noopener">Ver no mapa</a>
+          </p>
+          <p><strong>Telefone:</strong> <a href="tel:+551140000000">(11)&nbsp;4000&#8209;0000</a></p>
+          <p><strong>E-mail:</strong> <a href="mailto:contato@clinicaexemplo.com.br">contato@clinicaexemplo.com.br</a></p>
+          <p><strong>Horário:</strong> Segunda a sexta, das 9h às 18h</p>
+        </div>
+        <div class="grupo-botoes">
+          <a class="botao botao-primario" href="https://wa.me/5511999999999" target="_blank" rel="noopener">Falar no WhatsApp</a>
+        </div>
+      </div>
+    </section>
   </main>
 
-  <footer class="rodape">
+  <footer class="rodape rodape-negocio">
     <div class="rodape-conteudo">
-      <p>Feito com HTML, CSS e JS puros — sem build, sem dependências.</p>
+      <div>
+        <strong>Clínica Sorriso Pleno</strong>
+        <p>Rua Exemplo, 123 — São Paulo, SP · (11)&nbsp;4000&#8209;0000</p>
+      </div>
       <p>
-        <a href="#/sobre">Sobre este projeto</a> ·
+        <a href="./tecnologia.html">Como este site foi feito</a> ·
         <a href="https://github.com/pgillets/simple_single_page_app">Código no GitHub</a>
       </p>
     </div>
