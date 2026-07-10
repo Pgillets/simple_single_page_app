@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Só o site institucional (index.html) entra aqui: é a página que deve
+  aparecer nos resultados de busca. tecnologia.html tem <meta name="robots"
+  content="noindex"> e, por isso, não pertence a este sitemap (é a própria
+  recomendação do Google: não listar páginas noindex).
+
+  Atualize a URL abaixo quando o domínio próprio entrar (ver docs/DOMINIO.md).
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://pgillets.github.io/simple_single_page_app/</loc>
+    <lastmod>2026-07-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>

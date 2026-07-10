@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!--
+    CSP em site 100% estático: o GitHub Pages não permite cabeçalhos HTTP
+    customizados, mas uma meta tag cobre quase tudo. Por causa dela, este
+    documento não tem NENHUM script ou estilo inline — tudo vem de arquivos
+    próprios (script-src/style-src herdam de default-src 'self').
+  -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' https://api.github.com; img-src 'self' data:; base-uri 'self'; form-action 'none'; object-src 'none'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+
+  <!-- Fora do índice de busca de propósito: o objetivo de SEO deste template é
+       o site institucional (index.html), não esta demonstração técnica. "follow"
+       mantém o crédito de link fluindo para o repositório e demais páginas. -->
+  <meta name="robots" content="noindex, follow">
+
+  <title>Como este site foi feito · Modelo Negócio Local</title>
+  <meta name="description" content="Os bastidores técnicos deste template: uma SPA sem build, sem framework e sem dependências, com roteamento, tema, Web Components, Canvas, PWA e mais — tudo explicado.">
+
+  <!-- Únicas URLs absolutas do projeto: atualizadas no checklist de docs/DOMINIO.md quando o domínio próprio entrar. -->
+  <link rel="canonical" href="https://pgillets.github.io/simple_single_page_app/tecnologia.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Como este site foi feito — bastidores técnicos">
+  <meta property="og:description" content="SPA sem build, sem framework e sem dependências, hospedada de graça no GitHub Pages.">
+  <meta property="og:url" content="https://pgillets.github.io/simple_single_page_app/tecnologia.html">
+  <meta property="og:image" content="https://pgillets.github.io/simple_single_page_app/assets/og-capa.png">
+  <meta property="og:locale" content="pt_BR">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f7fb">
+  <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0e1118">
+
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./assets/icones/icone-192.png">
+  <link rel="manifest" href="./manifest.webmanifest">
+
+  <link rel="stylesheet" href="./css/tokens.css">
+  <link rel="stylesheet" href="./css/base.css">
+  <link rel="stylesheet" href="./css/componentes.css">
+
+  <!-- Anti-FOUC: aplica o tema salvo ANTES do primeiro paint. Script clássico e bloqueante de propósito. -->
+  <script src="./js/tema-boot.js"></script>
+  <script type="module" src="./js/app.js"></script>
+</head>
+<body>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="topo">
+    <div class="topo-conteudo">
+      <a class="marca" href="#/">
+        <img src="./assets/favicon.svg" alt="" width="22" height="22">
+        <span>Bastidores técnicos</span>
+      </a>
+      <nav aria-label="Navegação principal">
+        <a href="#/">Início</a>
+        <a href="#/roteamento">Rotas</a>
+        <a href="#/tema">Tema</a>
+        <a href="#/componentes">Componentes</a>
+        <a href="#/canvas">Canvas</a>
+        <a href="#/api">API</a>
+        <a href="#/notas">Notas</a>
+        <a href="#/offline">Offline</a>
+      </nav>
+      <button id="alternar-tema" type="button" aria-label="Alternar tema"></button>
+    </div>
+  </header>
+
+  <main id="conteudo" tabindex="-1">
+    <noscript>
+      <h1>Bastidores técnicos</h1>
+      <p>Esta página é uma <em>single page application</em> escrita em JavaScript puro — sem build e sem
+        dependências — e precisa de JavaScript habilitado para funcionar.</p>
+      <p>O código-fonte completo está em
+        <a href="https://github.com/pgillets/simple_single_page_app">github.com/pgillets/simple_single_page_app</a>.</p>
+    </noscript>
+  </main>
+
+  <footer class="rodape">
+    <div class="rodape-conteudo">
+      <p>Feito com HTML, CSS e JS puros — sem build, sem dependências.</p>
+      <p>
+        <a href="./index.html">← Ver o site institucional</a> ·
+        <a href="https://github.com/pgillets/simple_single_page_app">Código no GitHub</a>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

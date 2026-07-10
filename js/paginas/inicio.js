@@ -1,5 +1,8 @@
 /*
- * Página inicial — a tese do projeto e o mapa das demonstrações.
+ * Página inicial dos bastidores técnicos — a tese do projeto e o mapa
+ * das demonstrações. Não é mais a porta de entrada do site: quem chega
+ * em "/" (fora do hash) vê o site institucional real; esta página vive
+ * em tecnologia.html e explica como ele foi construído por dentro.
  */
 
 export const titulo = "Início";
@@ -10,16 +13,20 @@ export function render(outlet) {
       <section class="heroi">
         <h1>Simples de verdade. <span class="texto-gradiente">Poderosa de verdade.</span></h1>
         <p class="lide">
-          Este site é uma <em>single page application</em> escrita em HTML, CSS e JavaScript
-          puros — sem build, sem framework, sem dependências — hospedada de graça no
-          GitHub Pages. Cada página abaixo demonstra <strong>e explica</strong> uma
-          capacidade da plataforma web moderna.
+          Isto não é o site — é o <strong>bastidor</strong> dele. O modelo de site
+          institucional que este template gera está em
+          <a href="./index.html">./index.html</a>; aqui você vê, página por página, as
+          capacidades da plataforma web que o tornam possível: sem build, sem
+          framework, sem dependências, hospedado de graça no GitHub Pages.
         </p>
         <div class="linha-selos">
           <span class="selo selo-ok">Zero build</span>
           <span class="selo selo-ok">Zero dependências</span>
           <span class="selo selo-ok">Hospedagem gratuita</span>
           <span class="selo selo-ok">PWA instalável</span>
+        </div>
+        <div class="grupo-botoes">
+          <a class="botao botao-primario" href="./index.html">Ver o site institucional</a>
         </div>
       </section>
 
