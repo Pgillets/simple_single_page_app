@@ -11,8 +11,8 @@
  * desregistra o worker e apaga todos os caches.
  */
 
-// O beforeinstallprompt (só Chromium) dispara cedo, antes de o visitante
-// chegar à página #/offline — capturamos e guardamos para usar depois.
+// O beforeinstallprompt (só Chromium) dispara cedo, antes de qualquer UI
+// própria pedir a instalação — capturamos e guardamos para usar depois.
 let eventoInstalacao = null;
 
 addEventListener("beforeinstallprompt", (evento) => {
@@ -39,9 +39,11 @@ export function registrarServiceWorker() {
   // Registrar depois do load não disputa banda com o carregamento da página.
   addEventListener("load", async () => {
     try {
-      // "./sw.js" resolve contra a URL do documento — que, com roteamento por
-      // hash, é sempre a base do site. O escopo fica correto tanto em
-      // /simple_single_page_app/ quanto num domínio próprio.
+      // "./sw.js" resolve contra a URL do documento. Como as 4 páginas do
+      // site vivem todas na raiz do repositório, o caminho relativo aponta
+      // para o mesmo arquivo não importa qual página fez o registro — e o
+      // escopo fica correto tanto em /simple_single_page_app/ quanto num
+      // domínio próprio.
       const registro = await navigator.serviceWorker.register("./sw.js");
       vigiarAtualizacao(registro);
     } catch (erro) {

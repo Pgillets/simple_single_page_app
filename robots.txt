@@ -1,5 +1,7 @@
-# Permite tudo por padrão. tecnologia.html já se exclui via <meta name="robots">
-# (mais confiável por página do que listar um Disallow aqui).
+# Permite tudo por padrão. Uma página pode se excluir da indexação via
+# <meta name="robots" content="noindex"> própria (ex.: galeria.html) —
+# mais confiável por página do que listar um Disallow aqui, e não impede
+# o crawler de seguir os links que saem dela.
 User-agent: *
 Allow: /
 

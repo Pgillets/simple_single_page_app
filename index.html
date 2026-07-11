@@ -6,18 +6,18 @@
 
   <!--
     CONTEÚDO DE EXEMPLO — troque pelo da sua empresa.
-    Esta página simula uma clínica odontológica fictícia ("Clínica Sorriso
-    Pleno") só para deixar concretos: a estrutura de seções, as meta tags de
+    Este template simula uma clínica odontológica fictícia ("Clínica Sorriso
+    Pleno") só para deixar concretos: a estrutura de páginas, as meta tags de
     SEO e o JSON-LD abaixo. Nome, textos, endereço, telefone e imagens são
     todos placeholders — troque tudo antes de publicar.
 
-    Por que este HTML é estático (sem JavaScript renderizando o conteúdo)?
-    Buscadores e redes sociais devem ver o conteúdo real imediatamente, sem
-    precisar executar JS — e o site precisa funcionar mesmo se o JS falhar
-    ou demorar. JS aqui só liga melhorias (tema, navegação realçada,
-    funcionamento offline) — nunca o conteúdo em si. Veja tecnologia.html
-    para a versão SPA deste mesmo template, usada nas páginas de
-    demonstração técnica.
+    Este é o site institucional de verdade: 4 páginas HTML estáticas
+    (index.html, sobre.html, contato.html, galeria.html), sem depender de
+    JavaScript para existir. Buscadores e redes sociais devem ver o conteúdo
+    real imediatamente, sem precisar executar JS — e o site precisa
+    funcionar mesmo se o JS falhar ou demorar. JS aqui só liga melhorias
+    (tema, cabeçalho/navegação compartilhados, funcionamento offline) —
+    nunca o conteúdo em si.
   -->
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; base-uri 'self'; form-action 'none'; object-src 'none'">
   <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -49,7 +49,7 @@
 
   <!-- Anti-FOUC: aplica o tema salvo ANTES do primeiro paint. Script clássico e bloqueante de propósito. -->
   <script src="./js/tema-boot.js"></script>
-  <script type="module" src="./js/app-site.js"></script>
+  <script type="module" src="./js/site.js"></script>
 
   <!--
     Dados estruturados (schema.org/Dentist, um subtipo de LocalBusiness).
@@ -58,13 +58,17 @@
     Um <script type="application/ld+json"> é dado inerte, não código — a
     CSP acima não precisa (nem deve) abrir exceção para ele.
 
+    Este bloco vive SÓ nesta página (não repetido em sobre.html/contato.html)
+    — uma cópia só, sempre correta, é mais simples do que várias cópias que
+    podem ficar dessincronizadas. index.html é a URL canônica do negócio.
+
     ATENÇÃO com "aggregateRating": ratingValue/reviewCount abaixo são
     FICTÍCIOS, só para a estrutura ficar completa. O Google não garante
     (e pode penalizar) nota "inventada" sem avaliações reais por trás —
     troque pelos números de verdade (Google Business Profile, etc.) antes
-    de publicar, e mantenha visível na página (ver seção #depoimentos e
-    o <estrela-avaliacao> abaixo) — é exigência do Google que o dado
-    estruturado corresponda a algo que uma pessoa também veja no site.
+    de publicar, e mantenha visível na página (ver a seção "Por que
+    escolher..." abaixo, com o <estrela-avaliacao>) — é exigência do Google
+    que o dado estruturado corresponda a algo que uma pessoa também veja.
   -->
   <script type="application/ld+json">
   {
@@ -109,26 +113,22 @@
   </script>
 </head>
 <body>
-  <a class="pular" href="#inicio">Pular para o conteúdo</a>
+  <a class="pular" href="#conteudo">Pular para o conteúdo</a>
 
   <header class="topo">
-    <div class="topo-conteudo">
-      <a class="marca" href="#inicio">
-        <img src="./assets/favicon.svg" alt="" width="22" height="22">
-        <span>Clínica Sorriso Pleno</span>
-      </a>
-      <nav aria-label="Navegação principal">
-        <a href="#inicio">Início</a>
-        <a href="#servicos">Serviços</a>
-        <a href="#sobre">Sobre</a>
-        <a href="#depoimentos">Depoimentos</a>
-        <a href="#contato">Contato</a>
+    <cabecalho-site class="topo-conteudo" data-pagina="inicio" nome-negocio="Clínica Sorriso Pleno"></cabecalho-site>
+    <noscript>
+      <nav class="topo-conteudo" aria-label="Navegação principal">
+        <a href="./index.html">Início</a>
+        <a href="./index.html#servicos">Serviços</a>
+        <a href="./sobre.html">Sobre</a>
+        <a href="./galeria.html">Galeria</a>
+        <a href="./contato.html">Contato</a>
       </nav>
-      <button id="alternar-tema" type="button" aria-label="Alternar tema"></button>
-    </div>
+    </noscript>
   </header>
 
-  <main id="inicio">
+  <main id="conteudo">
     <section class="heroi">
       <h1>Seu sorriso merece o melhor cuidado</h1>
       <p class="lide">
@@ -136,11 +136,11 @@
         tecnologia de ponta, no coração de São Paulo.
       </p>
       <!--
-        Calculado de verdade em js/app-site.js a partir do horário abaixo (o
+        Calculado de verdade em js/site.js a partir do horário abaixo (o
         mesmo do "openingHoursSpecification" no JSON-LD do <head> — mantenha
         os dois em sincronia ao customizar). Sem JavaScript, este selo some
         e não atrapalha em nada: o horário continua visível como texto, na
-        seção #contato.
+        página contato.html.
       -->
       <selo-status id="selo-horario" status="aviso" texto="Verificando horário…"></selo-status>
       <div class="grupo-botoes">
@@ -178,69 +178,38 @@
       </div>
     </section>
 
-    <section id="sobre">
-      <h2>Sobre a clínica</h2>
-      <div class="sobre-negocio">
-        <div class="sobre-negocio-texto">
-          <p>
-            Há mais de 15 anos cuidamos da saúde bucal de famílias inteiras em São
-            Paulo. Nossa equipe combina experiência clínica com equipamentos modernos
-            para oferecer um atendimento cuidadoso, do primeiro contato ao pós-tratamento.
-          </p>
-          <p>
-            Acreditamos que ir ao dentista não precisa ser desconfortável — por isso
-            investimos em um ambiente acolhedor e em explicar cada etapa do tratamento
-            com clareza.
-          </p>
+    <section id="prova-social">
+      <h2>Por que escolher a Clínica Sorriso Pleno</h2>
+      <div class="prova-social-grade">
+        <!-- Mesmo número fictício do "aggregateRating" no JSON-LD do <head> — troque os dois juntos. -->
+        <div class="stat">
+          <span class="stat-valor">4,9</span>
+          <estrela-avaliacao class="stat-estrelas" valor="5" somente-leitura aria-label="Avaliação média: 4,9 de 5 estrelas"></estrela-avaliacao>
+          <span class="stat-rotulo">127 avaliações</span>
         </div>
-        <div class="grade-stats">
-          <div class="stat">
-            <span class="stat-valor">15+</span>
-            <span class="stat-rotulo">anos de experiência</span>
-          </div>
-          <div class="stat">
-            <span class="stat-valor">3.000+</span>
-            <span class="stat-rotulo">pacientes atendidos</span>
-          </div>
-          <!-- Mesmo número fictício do "aggregateRating" no JSON-LD do <head> — troque os dois juntos. -->
-          <div class="stat">
-            <span class="stat-valor">4,9</span>
-            <estrela-avaliacao class="stat-estrelas" valor="5" somente-leitura aria-label="Avaliação média: 4,9 de 5 estrelas"></estrela-avaliacao>
-            <span class="stat-rotulo">127 avaliações</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="depoimentos">
-      <h2>O que dizem nossos pacientes</h2>
-      <div class="grade-depoimentos">
         <blockquote class="depoimento">
           <p>"Atendimento excelente, super atenciosos e o resultado do meu clareamento ficou incrível. Recomendo de olhos fechados."</p>
           <footer><span aria-hidden="true">★★★★★</span> Marina C.</footer>
         </blockquote>
-        <blockquote class="depoimento">
-          <p>"Fiz tratamento ortodôntico com eles e o acompanhamento foi impecável do início ao fim. Equipe muito profissional."</p>
-          <footer><span aria-hidden="true">★★★★★</span> Rafael S.</footer>
-        </blockquote>
       </div>
     </section>
 
-    <section id="contato">
-      <h2>Venha nos visitar</h2>
-      <div class="contato-grade">
-        <div class="contato-info">
-          <p>
-            <strong>Endereço:</strong> Rua Exemplo, 123 — São Paulo, SP
-            <a href="https://www.google.com/maps/search/?api=1&query=Rua+Exemplo+123+São+Paulo+SP" target="_blank" rel="noopener">Ver no mapa</a>
-          </p>
-          <p><strong>Telefone:</strong> <a href="tel:+551140000000">(11)&nbsp;4000&#8209;0000</a></p>
-          <p><strong>E-mail:</strong> <a href="mailto:contato@clinicaexemplo.com.br">contato@clinicaexemplo.com.br</a></p>
-          <p><strong>Horário:</strong> Segunda a sexta, das 9h às 18h</p>
-        </div>
-        <div class="grupo-botoes">
-          <a class="botao botao-primario" href="https://wa.me/5511999999999" target="_blank" rel="noopener">Falar no WhatsApp</a>
-        </div>
+    <section id="sobre-resumo">
+      <h2>Quem cuida do seu sorriso</h2>
+      <p class="lide">
+        Há mais de <strong>15 anos</strong> cuidamos da saúde bucal de famílias inteiras
+        em São Paulo — já são mais de <strong>3.000 pacientes atendidos</strong> — com
+        atendimento humanizado e equipamentos modernos, do primeiro contato ao
+        pós-tratamento.
+      </p>
+      <p><a class="botao" href="./sobre.html">Conheça nossa história completa →</a></p>
+    </section>
+
+    <section class="faixa-cta">
+      <h2>Pronto para agendar sua consulta?</h2>
+      <div class="grupo-botoes">
+        <a class="botao botao-primario" href="https://wa.me/5511999999999" target="_blank" rel="noopener">Agendar pelo WhatsApp</a>
+        <a class="botao" href="./contato.html">Ver outras formas de contato</a>
       </div>
     </section>
   </main>
@@ -252,7 +221,6 @@
         <p>Rua Exemplo, 123 — São Paulo, SP · (11)&nbsp;4000&#8209;0000</p>
       </div>
       <p>
-        <a href="./tecnologia.html">Como este site foi feito</a> ·
         <a href="https://github.com/pgillets/simple_single_page_app">Código no GitHub</a>
       </p>
     </div>

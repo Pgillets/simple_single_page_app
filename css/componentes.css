@@ -1,6 +1,6 @@
 /*
- * componentes.css — cabeçalho, navegação, cards, botões, formulários,
- * blocos de demonstração e demais peças reutilizáveis.
+ * componentes.css — cabeçalho, navegação, botões, selos, tabelas e demais
+ * peças reutilizadas pelas 4 páginas do site.
  */
 
 /* ===== Cabeçalho e navegação ===== */
@@ -98,6 +98,21 @@
   }
 }
 
+/* Abaixo disso, os 5 itens de nav (Início/Serviços/Sobre/Galeria/Contato)
+   não cabem mais na largura toda com o espaçamento normal — encolhe fonte
+   e preenchimento para caber sem depender da rolagem horizontal (que
+   continua como rede de segurança em telas ainda mais estreitas). */
+@media (max-width: 26rem) {
+  .topo nav {
+    gap: 0.05rem;
+  }
+
+  .topo nav a {
+    padding: 0.34rem 0.5rem;
+    font-size: 0.85rem;
+  }
+}
+
 /* ===== Rodapé ===== */
 
 .rodape {
@@ -116,7 +131,7 @@
   justify-content: space-between;
 }
 
-/* ===== Herói (página inicial) ===== */
+/* ===== Herói ===== */
 
 .heroi {
   padding-block: 2rem 0.5rem;
@@ -141,7 +156,7 @@
   margin-top: 1.4rem;
 }
 
-/* ===== Selos (badges de estado) ===== */
+/* ===== Selos (badges de estado / comodidades) ===== */
 
 .selo {
   display: inline-flex;
@@ -177,18 +192,7 @@
   color: var(--cor-erro);
 }
 
-/* ===== Grades de cards e de stats ===== */
-
-.grade-cards {
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(14.5rem, 1fr));
-  margin-block: 2rem;
-}
-
-.grade-cards--estreita {
-  max-width: 22rem;
-}
+/* ===== Grade de estatísticas ===== */
 
 .grade-stats {
   display: grid;
@@ -258,16 +262,7 @@
   margin-block: 0.9rem;
 }
 
-/* ===== Blocos de demonstração ===== */
-
-.bloco-demo {
-  background: var(--cor-superficie);
-  border: 1px solid var(--cor-borda);
-  border-radius: var(--raio);
-  padding: 1.25rem;
-  margin-block: 1.1rem;
-  box-shadow: var(--sombra);
-}
+/* ===== Caixa de aviso/callout ===== */
 
 .chamada-caixa {
   border-inline-start: 3px solid var(--cor-destaque);
@@ -279,7 +274,7 @@
   max-width: 72ch;
 }
 
-/* ===== Código ===== */
+/* ===== Código (baseline genérica) ===== */
 
 code {
   font-family: var(--fonte-mono);
@@ -306,54 +301,6 @@ pre code {
   line-height: 1.6;
 }
 
-/* <trecho-codigo> — Web Component de light DOM (estilizado por esta folha global,
-   de propósito, em contraste com o shadow DOM do <demo-card>). */
-
-trecho-codigo {
-  display: block;
-  margin-block: 1.25rem;
-}
-
-trecho-codigo details {
-  border: 1px solid var(--cor-borda);
-  border-radius: var(--raio-s);
-  background: var(--cor-superficie);
-  overflow: hidden;
-}
-
-trecho-codigo summary {
-  cursor: pointer;
-  padding: 0.7rem 1rem;
-  font-weight: 600;
-}
-
-trecho-codigo summary code {
-  font-weight: 400;
-}
-
-trecho-codigo .barra {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.3rem 0.6rem 0.3rem 1rem;
-  border-top: 1px solid var(--cor-borda);
-  background: var(--cor-superficie-2);
-  font-size: 0.8rem;
-  color: var(--cor-texto-suave);
-}
-
-trecho-codigo .barra .botao {
-  padding: 0.25rem 0.8rem;
-  font-size: 0.8rem;
-}
-
-trecho-codigo pre {
-  margin: 0;
-  border-radius: 0;
-  max-height: 24rem;
-}
-
 /* ===== Tabelas ===== */
 
 .rolagem-x {
@@ -378,221 +325,6 @@ th {
   color: var(--cor-texto-suave);
   font-weight: 600;
   font-size: 0.85rem;
-}
-
-/* ===== Formulário e lista de notas ===== */
-
-.form-nota {
-  display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-}
-
-.form-nota input {
-  flex: 1;
-  min-width: 12rem;
-  font: inherit;
-  padding: 0.55rem 0.9rem;
-  border-radius: 999px;
-  border: 1px solid var(--cor-borda);
-  background: var(--cor-fundo);
-  color: var(--cor-texto);
-}
-
-.lista-notas {
-  list-style: none;
-  padding: 0;
-  margin-block: 1rem 0;
-}
-
-.lista-notas li {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-  padding: 0.55rem 0.25rem;
-  border-top: 1px solid var(--cor-borda);
-}
-
-.lista-notas input[type="checkbox"] {
-  accent-color: var(--cor-destaque);
-  width: 1.05rem;
-  height: 1.05rem;
-  flex: none;
-}
-
-.texto-nota {
-  flex: 1;
-  overflow-wrap: anywhere;
-}
-
-li.feita .texto-nota {
-  text-decoration: line-through;
-  color: var(--cor-texto-suave);
-}
-
-.apagar-nota {
-  border: none;
-  background: none;
-  color: var(--cor-erro);
-  cursor: pointer;
-  border-radius: var(--raio-s);
-  padding: 0.15rem 0.5rem;
-  font-size: 1rem;
-}
-
-.apagar-nota:hover {
-  background: color-mix(in srgb, var(--cor-erro) 12%, transparent);
-}
-
-.vazio {
-  color: var(--cor-texto-suave);
-  font-style: italic;
-  padding-block: 0.75rem;
-}
-
-/* ===== Lista de commits (página API) ===== */
-
-.lista-commits {
-  list-style: none;
-  padding: 0;
-  margin-block: 0.5rem 0;
-}
-
-.lista-commits li {
-  display: flex;
-  gap: 0.35rem 0.9rem;
-  padding: 0.65rem 0.25rem;
-  border-top: 1px solid var(--cor-borda);
-  align-items: baseline;
-  flex-wrap: wrap;
-}
-
-.lista-commits .msg {
-  flex: 1;
-  min-width: 14rem;
-}
-
-.lista-commits .meta {
-  color: var(--cor-texto-suave);
-  font-size: 0.85rem;
-  white-space: nowrap;
-}
-
-/* ===== Amostras de tokens (página Tema) ===== */
-
-.grade-amostras {
-  display: grid;
-  gap: 0.75rem;
-  grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
-  margin-block: 1rem;
-}
-
-.amostra {
-  border: 1px solid var(--cor-borda);
-  border-radius: var(--raio-s);
-  overflow: hidden;
-  background: var(--cor-superficie);
-}
-
-.amostra-cor {
-  height: 3.1rem;
-  border-bottom: 1px solid var(--cor-borda);
-}
-
-/* Uma classe por token de cor (ver js/paginas/tema.js) — a cor vem só daqui,
-   nunca de JS setando "style" no elemento (a CSP do site não permite). */
-.amostra-cor.fundo { background: var(--cor-fundo); }
-.amostra-cor.superficie { background: var(--cor-superficie); }
-.amostra-cor.texto { background: var(--cor-texto); }
-.amostra-cor.texto-suave { background: var(--cor-texto-suave); }
-.amostra-cor.destaque { background: var(--cor-destaque); }
-.amostra-cor.borda { background: var(--cor-borda); }
-.amostra-cor.ok { background: var(--cor-ok); }
-.amostra-cor.erro { background: var(--cor-erro); }
-
-.amostra figcaption {
-  padding: 0.45rem 0.7rem;
-  font-family: var(--fonte-mono);
-  font-size: 0.75rem;
-  color: var(--cor-texto-suave);
-}
-
-/* ===== Demos de componentes (página Componentes) ===== */
-
-.linha-selos-demo {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  align-items: center;
-  margin-block: 1rem;
-}
-
-.demo-avaliacao {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 1rem;
-  margin-block: 1rem;
-}
-
-.demo-avaliacao p {
-  color: var(--cor-texto-suave);
-  font-size: 0.92rem;
-}
-
-/* ::part() em ação: só os nomes de parte expostos pelo componente
-   (selo, ponto, rotulo) são alcançáveis daqui — o resto do shadow DOM
-   continua isolado. */
-.demo-selo-customizado::part(selo) {
-  border-style: dashed;
-  border-width: 2px;
-  text-transform: uppercase;
-  font-size: 0.72rem;
-  letter-spacing: 0.04em;
-}
-
-.demo-selo-customizado::part(ponto) {
-  width: 0.7em;
-  height: 0.7em;
-}
-
-/* ===== Bloco do canvas ===== */
-
-.bloco-canvas {
-  position: relative;
-  padding: 0;
-  overflow: hidden;
-}
-
-.bloco-canvas canvas {
-  width: 100%;
-  height: 24rem;
-  touch-action: none;
-}
-
-.hud {
-  position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
-  display: flex;
-  gap: 0.5rem;
-}
-
-/* ===== Listas de status (página Offline) ===== */
-
-.lista-status {
-  list-style: none;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.45rem;
-}
-
-.lista-status li {
-  display: flex;
-  gap: 0.6ch;
-  align-items: baseline;
-  flex-wrap: wrap;
 }
 
 /* ===== Toast de atualização do service worker ===== */

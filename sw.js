@@ -10,19 +10,22 @@
  * mais uma camada de staleness em cima disso. Network-first elimina o
  * clássico "publiquei e continuo vendo a versão antiga".
  *
- * A API do GitHub (cross-origin) nunca é interceptada: passa direto.
+ * A API do GitHub e afins (cross-origin) nunca são interceptadas: passam direto.
  *
  * Ao publicar uma mudança em qualquer arquivo do PRECACHE, suba a VERSAO —
  * é o gatilho que faz o activate() descartar o cache antigo.
  */
 
-const VERSAO = "v4";
+const VERSAO = "v5";
 const CACHE = `shell-${VERSAO}`;
+
+// As 4 páginas do site — usadas também pelo fallback de navegação offline
+// abaixo. Adicionar uma página nova ao template? Acrescente o arquivo aqui.
+const PAGINAS = ["./index.html", "./sobre.html", "./contato.html", "./galeria.html"];
 
 const PRECACHE = [
   "./",
-  "./index.html",
-  "./tecnologia.html",
+  ...PAGINAS,
   "./404.html",
   "./manifest.webmanifest",
   "./css/tokens.css",
@@ -30,30 +33,24 @@ const PRECACHE = [
   "./css/componentes.css",
   "./css/negocio.css",
   "./js/tema-boot.js",
-  "./js/app.js",
-  "./js/app-site.js",
-  "./js/roteador.js",
   "./js/tema.js",
-  "./js/github-api.js",
+  "./js/site.js",
+  "./js/galeria.js",
   "./js/sw-registro.js",
-  "./js/componentes/demo-card.js",
-  "./js/componentes/trecho-codigo.js",
+  "./js/componentes/cabecalho-site.js",
   "./js/componentes/selo-status.js",
   "./js/componentes/estrela-avaliacao.js",
-  "./js/paginas/inicio.js",
-  "./js/paginas/roteamento.js",
-  "./js/paginas/tema.js",
-  "./js/paginas/componentes.js",
-  "./js/paginas/canvas.js",
-  "./js/paginas/api.js",
-  "./js/paginas/notas.js",
-  "./js/paginas/offline.js",
-  "./js/paginas/sobre.js",
-  "./js/paginas/nao-encontrada.js",
   "./assets/favicon.svg",
   "./assets/icones/icone-192.png",
   "./assets/icones/icone-512.png",
+  "./assets/icones/icone-maskable-512.png",
   "./assets/og-capa-negocio.png",
+  "./assets/galeria/recepcao.png",
+  "./assets/galeria/consultorio-1.png",
+  "./assets/galeria/consultorio-2.png",
+  "./assets/galeria/equipe.png",
+  "./assets/galeria/sala-espera.png",
+  "./assets/galeria/equipamentos.png",
 ];
 
 self.addEventListener("install", (evento) => {
@@ -111,11 +108,12 @@ async function networkFirst(requisicao) {
     const emCache = await cache.match(requisicao, { ignoreSearch: true });
     if (emCache) return emCache;
     if (requisicao.mode === "navigate") {
-      // Duas cascas possíveis: tecnologia.html tem sua própria SPA por
-      // dentro (roteador com várias rotas); qualquer outro caminho é o
-      // site institucional (index.html), incluindo "/" e "/index.html".
-      const paginaTecnica = new URL(requisicao.url).pathname.endsWith("tecnologia.html");
-      const casca = await cache.match(paginaTecnica ? "./tecnologia.html" : "./index.html");
+      // Cada uma das 4 páginas já está cacheada com o próprio caminho — o
+      // cache.match acima já resolve a maioria dos casos offline. Este
+      // fallback só entra em cena para um caminho de navegação não
+      // reconhecido (ex.: um link com typo); nesse caso, cai no Início.
+      const pagina = PAGINAS.find((p) => url.pathname.endsWith(p.slice(1)));
+      const casca = await cache.match(pagina ?? "./index.html");
       if (casca) return casca;
     }
     throw erro;

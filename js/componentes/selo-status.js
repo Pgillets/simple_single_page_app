@@ -1,11 +1,11 @@
 /*
  * <selo-status> — atributos reativos + ::part().
  *
- * Contraste didático com <demo-card>: aquele renderiza uma vez, no
- * construtor, e nunca mais muda sozinho. Este componente observa seus
- * próprios atributos (observedAttributes) e se redesenha sozinho sempre
- * que "status" ou "texto" mudam — via setAttribute() ou via as
- * propriedades .status/.texto — sem precisar recriar o elemento.
+ * Diferente de um componente que só renderiza uma vez no construtor e
+ * nunca mais muda sozinho, este observa seus próprios atributos
+ * (observedAttributes) e se redesenha sozinho sempre que "status" ou
+ * "texto" mudam — via setAttribute() ou via as propriedades
+ * .status/.texto — sem precisar recriar o elemento.
  *
  * Também expõe partes nomeadas (part="selo" / "ponto" / "rotulo") — a
  * forma que o shadow DOM dá para o CSS de FORA estilizar pontos
