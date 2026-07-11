@@ -108,72 +108,11 @@ main {
   padding: 2.5rem 1.25rem 4rem;
 }
 
-/* O roteador move o foco para <main> a cada troca de rota (leitores de tela
-   anunciam a nova página); o anel de foco fica só para navegação por teclado. */
-main:focus {
-  outline: none;
-}
-
 .lide {
   font-size: 1.15rem;
   color: var(--cor-texto-suave);
   max-width: 62ch;
   margin-top: 0.75rem;
-}
-
-.pagina section {
-  margin-block: 2.5rem;
-}
-
-.pagina section h2 {
-  margin-bottom: 0.6rem;
-}
-
-.pagina section h3 {
-  font-size: 1.05rem;
-  margin-top: 1.6rem;
-  margin-bottom: 0.5rem;
-}
-
-.pagina section p,
-.pagina section li {
-  max-width: 72ch;
-}
-
-.pagina section p + p {
-  margin-top: 0.6rem;
-}
-
-/*
- * View Transitions API: o roteador embrulha cada troca de rota em
- * document.startViewTransition(). O cabeçalho ganha nome próprio para ficar
- * estável enquanto o resto da página desliza.
- */
-.topo {
-  view-transition-name: topo;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  ::view-transition-old(root) {
-    animation: 100ms cubic-bezier(0.4, 0, 1, 1) both vt-sair;
-  }
-
-  ::view-transition-new(root) {
-    animation: 240ms 70ms cubic-bezier(0, 0, 0.2, 1) both vt-entrar;
-  }
-}
-
-@keyframes vt-sair {
-  to {
-    opacity: 0;
-  }
-}
-
-@keyframes vt-entrar {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
 }
 
 /* Quem pede menos movimento, recebe menos movimento — em tudo. */

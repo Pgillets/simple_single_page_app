@@ -3,7 +3,7 @@
 > **English summary**: this is the runbook for pointing a custom domain at this GitHub
 > Pages site later. Activation is a one-line `CNAME` file commit; DNS records and the
 > HTTPS/verification steps are documented below in Portuguese. The app code needs
-> **zero changes** — every internal path is already relative and hash-routed.
+> **zero changes** — every internal path across the site's pages is already relative.
 
 Este guia é executado **quando** houver um domínio escolhido. Até lá, o site vive em
 `https://pgillets.github.io/simple_single_page_app/` e nada aqui precisa ser feito.
@@ -87,13 +87,14 @@ preferência ao commit direto, que é rastreável no histórico do repositório.
 
 ## 7. Checklist pós-migração (só código, sem risco)
 
-O código da aplicação não precisa de nenhuma mudança — roteamento por hash e caminhos
-relativos já funcionam em qualquer base. O que **vale a pena** atualizar, por serem as
-únicas URLs absolutas do projeto:
+O código da aplicação não precisa de nenhuma mudança — todos os caminhos internos
+(CSS, JS, imagens, links entre páginas) já são relativos e funcionam em qualquer base.
+O que **vale a pena** atualizar, por serem as únicas URLs absolutas do projeto:
 
 - [ ] `index.html`: `<link rel="canonical">`, `og:url`, `og:image` e as URLs dentro do
       bloco `<script type="application/ld+json">` → novo domínio.
-- [ ] `tecnologia.html`: `<link rel="canonical">`, `og:url`, `og:image` → novo domínio.
+- [ ] `sobre.html`, `contato.html`, `galeria.html`: `<link rel="canonical">`, `og:url`,
+      `og:image` → novo domínio.
 - [ ] `robots.txt`: a linha `Sitemap:` → novo domínio.
 - [ ] `sitemap.xml`: a(s) `<loc>` → novo domínio (já existem desde o início — só
       trocar a URL, não recriar).
