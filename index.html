@@ -57,6 +57,14 @@
     no resultado de busca. Troque cada campo pelo dado real do negócio.
     Um <script type="application/ld+json"> é dado inerte, não código — a
     CSP acima não precisa (nem deve) abrir exceção para ele.
+
+    ATENÇÃO com "aggregateRating": ratingValue/reviewCount abaixo são
+    FICTÍCIOS, só para a estrutura ficar completa. O Google não garante
+    (e pode penalizar) nota "inventada" sem avaliações reais por trás —
+    troque pelos números de verdade (Google Business Profile, etc.) antes
+    de publicar, e mantenha visível na página (ver seção #depoimentos e
+    o <estrela-avaliacao> abaixo) — é exigência do Google que o dado
+    estruturado corresponda a algo que uma pessoa também veja no site.
   -->
   <script type="application/ld+json">
   {
@@ -88,6 +96,11 @@
         "closes": "18:00"
       }
     ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "127"
+    },
     "sameAs": [
       "https://www.instagram.com/",
       "https://www.facebook.com/"
@@ -122,6 +135,14 @@
         Odontologia completa para toda a família, com atendimento humanizado e
         tecnologia de ponta, no coração de São Paulo.
       </p>
+      <!--
+        Calculado de verdade em js/app-site.js a partir do horário abaixo (o
+        mesmo do "openingHoursSpecification" no JSON-LD do <head> — mantenha
+        os dois em sincronia ao customizar). Sem JavaScript, este selo some
+        e não atrapalha em nada: o horário continua visível como texto, na
+        seção #contato.
+      -->
+      <selo-status id="selo-horario" status="aviso" texto="Verificando horário…"></selo-status>
       <div class="grupo-botoes">
         <a class="botao botao-primario" href="https://wa.me/5511999999999" target="_blank" rel="noopener">
           Agendar pelo WhatsApp
@@ -181,9 +202,11 @@
             <span class="stat-valor">3.000+</span>
             <span class="stat-rotulo">pacientes atendidos</span>
           </div>
+          <!-- Mesmo número fictício do "aggregateRating" no JSON-LD do <head> — troque os dois juntos. -->
           <div class="stat">
             <span class="stat-valor">4,9</span>
-            <span class="stat-rotulo">avaliação média</span>
+            <estrela-avaliacao class="stat-estrelas" valor="5" somente-leitura aria-label="Avaliação média: 4,9 de 5 estrelas"></estrela-avaliacao>
+            <span class="stat-rotulo">127 avaliações</span>
           </div>
         </div>
       </div>

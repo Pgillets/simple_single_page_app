@@ -8,6 +8,10 @@ main > section {
   scroll-margin-top: 4.5rem; /* header sticky não cobre o topo da seção ao rolar até a âncora */
 }
 
+#selo-horario {
+  margin-block: 1rem 0.5rem;
+}
+
 main > section h2 {
   margin-bottom: 0.4rem;
 }
@@ -61,6 +65,11 @@ main > section > .lide {
 
 .sobre-negocio-texto p + p {
   margin-top: 0.75rem;
+}
+
+.stat-estrelas {
+  font-size: 0.6em; /* dimensiona junto do texto do card, sem depender de JS */
+  margin-block: 0.1rem 0.2rem;
 }
 
 @media (max-width: 46rem) {

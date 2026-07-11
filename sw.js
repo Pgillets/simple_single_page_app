@@ -16,7 +16,7 @@
  * é o gatilho que faz o activate() descartar o cache antigo.
  */
 
-const VERSAO = "v3";
+const VERSAO = "v4";
 const CACHE = `shell-${VERSAO}`;
 
 const PRECACHE = [
