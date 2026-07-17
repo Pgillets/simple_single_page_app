@@ -1,10 +1,10 @@
 # Template de site institucional para PMEs — SEO-first, zero build
 
-[![CI](https://github.com/pgillets/simple_single_page_app/actions/workflows/ci.yml/badge.svg)](https://github.com/pgillets/simple_single_page_app/actions/workflows/ci.yml)
+[![CI](https://github.com/pgillets/simple_web_app/actions/workflows/ci.yml/badge.svg)](https://github.com/pgillets/simple_web_app/actions/workflows/ci.yml)
 
 **🇧🇷 Português** · [🇺🇸 English](#english)
 
-🔗 **Exemplo no ar:** https://pgillets.github.io/simple_single_page_app/
+🔗 **Exemplo no ar:** https://pgillets.github.io/simple_web_app/
 
 Um template pronto para criar rapidamente o site de divulgação de uma pequena ou
 média empresa — em HTML, CSS e JavaScript puros, **sem build, sem framework, sem
@@ -106,8 +106,8 @@ Para simular exatamente como o site roda no GitHub Pages hoje (com o prefixo do
 repositório na URL):
 
 ```bash
-python3 tools/servidor.py --base simple_single_page_app
-# abre em http://localhost:8000/simple_single_page_app/
+python3 tools/servidor.py --base simple_web_app
+# abre em http://localhost:8000/simple_web_app/
 ```
 
 Qualquer servidor estático serve (`npx serve`, `python3 -m http.server`); o script
@@ -182,7 +182,7 @@ Built to rank: real static pages (indexable without depending on JavaScript), SE
 tags, structured data (schema.org) and a sitemap are already in place — see
 [SEO](#seo-1) below.
 
-**Live example:** https://pgillets.github.io/simple_single_page_app/
+**Live example:** https://pgillets.github.io/simple_web_app/
 
 ### The pages
 
@@ -228,7 +228,7 @@ fields, then update the URLs in `robots.txt`/`sitemap.xml` to your final domain.
 
 ```bash
 python3 tools/servidor.py                              # http://localhost:8000/
-python3 tools/servidor.py --base simple_single_page_app # simulates the current
+python3 tools/servidor.py --base simple_web_app # simulates the current
                                                           # GitHub Pages project-page URL
 ```
 
